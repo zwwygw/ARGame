@@ -20,6 +20,7 @@
 
 namespace GoogleARCore.Examples.HelloAR
 {
+    using System;
     using System.Collections.Generic;
     using GoogleARCore;
     using GoogleARCore.Examples.Common;
@@ -28,6 +29,7 @@ namespace GoogleARCore.Examples.HelloAR
 #if UNITY_EDITOR
     // Set up touch input propagation while using Instant Preview in the editor.
     using Input = InstantPreviewInput;
+    using Random = System.Random;
 #endif
 
     /// <summary>
@@ -46,15 +48,15 @@ namespace GoogleARCore.Examples.HelloAR
         public GameObject DetectedPlanePrefab;
 
         /// <summary>
-        /// A model to place when a raycast from a user touch hits a plane.
+        ///     怪物prefab.
         /// </summary>
-        public GameObject AndyPlanePrefab;
+        public GameObject Monster;
 
         /// <summary>
         /// A model to place when a raycast from a user touch hits a feature point.
         /// </summary>
         public GameObject AndyPointPrefab;
-
+        public GameObject MonsterParent;
         /// <summary>
         /// The rotation in degrees need to apply to model when the Andy model is placed.
         /// </summary>
@@ -64,7 +66,9 @@ namespace GoogleARCore.Examples.HelloAR
         /// True if the app is in the process of quitting due to an ARCore connection error, otherwise false.
         /// </summary>
         private bool m_IsQuitting = false;
+     
 
+        private int num_Monster;
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -101,24 +105,29 @@ namespace GoogleARCore.Examples.HelloAR
                     if (hit.Trackable is FeaturePoint)
                     {
                         prefab = AndyPointPrefab;
+                        Debug.Log("+++++++++++++");
                     }
                     else
                     {
-                        prefab = AndyPlanePrefab;
+                        prefab = Monster; 
+                        Debug.Log("***********");
                     }
-
-                    // Instantiate Andy model at the hit pose.
-                    var andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-
-                    // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
-                    andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
-
-                    // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
-                    // world evolves.
-                    var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-
-                    // Make Andy model a child of the anchor.
-                    andyObject.transform.parent = anchor.transform;
+                    System.Random random = new System.Random((int)DateTime.Now.Ticks);
+                    num_Monster = random.Next(10, 15);
+                    for (int i = 0; i <= num_Monster; i++)
+                    {
+                        // Instantiate Andy model at the hit pose.
+                        var andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+                        andyObject.transform.parent = MonsterParent.transform;
+                        // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
+                        andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
+                        // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
+                        // world evolves.
+                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                        // Make Andy model a child of the anchor.
+                        andyObject.transform.parent = anchor.transform;
+                    }
+                    
                 }
             }
         }
