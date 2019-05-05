@@ -7,7 +7,7 @@ using Random = System.Random;
 public class MonsterContrller : MonoBehaviour
 {
     Animation _monsterAnim;
-    private float runSpeed = 0.5f;
+    private float runSpeed = 1f;
     private void Start()
     {
         _monsterAnim = GetComponent<Animation>();
@@ -26,7 +26,8 @@ public class MonsterContrller : MonoBehaviour
             System.Random random = new System.Random((int)DateTime.Now.Ticks);
             float direction = (float)random.Next(0, 360);//在0--360之间随机生成一个单精度小数)
          //   transform.rotation = Quaternion.Euler(0, direction, 0);//旋转指定度数
-            int dirMove = random.Next(1, 6);
+            int dirMove = random.Next(0, 7);
+            runSpeed = (float)random.Next(0, 2);
             if(dirMove == 1)
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);//向前移动
@@ -51,7 +52,6 @@ public class MonsterContrller : MonoBehaviour
             {
                 transform.Translate(Vector3.down * Time.deltaTime * runSpeed);//向前移动
             }
-
         }
     }
 }

@@ -1,22 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="HelloARController.cs" company="Google">
-//
-// Copyright 2017 Google Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-// </copyright>
-//-----------------------------------------------------------------------
+﻿
 
 namespace GoogleARCore.Examples.HelloAR
 {
@@ -25,6 +7,8 @@ namespace GoogleARCore.Examples.HelloAR
     using GoogleARCore;
     using GoogleARCore.Examples.Common;
     using UnityEngine;
+    using UnityEngine.UI;
+    using UnityEngine.EventSystems;
 
 #if UNITY_EDITOR
     // Set up touch input propagation while using Instant Preview in the editor.
@@ -57,6 +41,11 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         public GameObject AndyPointPrefab;
         public GameObject MonsterParent;
+        public Button     FireBtn;
+        public Transform firePos;
+
+        public float speed = 15f;
+        public GameObject shelPref;
         /// <summary>
         /// The rotation in degrees need to apply to model when the Andy model is placed.
         /// </summary>
@@ -72,6 +61,18 @@ namespace GoogleARCore.Examples.HelloAR
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
+        /// 
+        private void Awake()
+        {
+            FireBtn.onClick.AddListener(delegate ()
+            {
+                OnClick(FireBtn.gameObject);
+            });
+        }
+        public void Start()
+        {
+          
+        }
         public void Update()
         {
             _UpdateApplicationLifecycle();
@@ -117,15 +118,16 @@ namespace GoogleARCore.Examples.HelloAR
                     for (int i = 0; i <= num_Monster; i++)
                     {
                         // Instantiate Andy model at the hit pose.
-                        var andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-                        andyObject.transform.parent = MonsterParent.transform;
+                        var monsterGO = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+
                         // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
-                        andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
+                        monsterGO.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
                         // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
                         // world evolves.
-                        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                        //    var anchor = hit.Trackable.CreateAnchor(hit.Pose);
                         // Make Andy model a child of the anchor.
-                        andyObject.transform.parent = anchor.transform;
+                        // andyObject.transform.parent = anchor.transform;
+                        monsterGO.transform.parent = MonsterParent.transform;
                     }
                     
                 }
@@ -174,18 +176,25 @@ namespace GoogleARCore.Examples.HelloAR
             }
         }
 
-        /// <summary>
+        //UGUI按钮点击触发
+        private void OnClick(GameObject go)
+        {
+            if(go == FireBtn.gameObject)
+            {
+                GameObject shell = GameObject.Instantiate(shelPref, firePos.position, firePos.rotation) as GameObject;
+                shell.GetComponent<Rigidbody>().velocity = shell.transform.forward * speed;
+                GameObject.Destroy(shell,2);
+                
+            }
+        }
+
         /// Actually quit the application.
-        /// </summary>
         private void _DoQuit()
         {
             Application.Quit();
         }
 
-        /// <summary>
         /// Show an Android toast message.
-        /// </summary>
-        /// <param name="message">Message string to show in the toast.</param>
         private void _ShowAndroidToastMessage(string message)
         {
             AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
