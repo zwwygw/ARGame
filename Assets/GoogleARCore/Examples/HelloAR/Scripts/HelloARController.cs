@@ -16,19 +16,12 @@ namespace GoogleARCore.Examples.HelloAR
     using Random = System.Random;
 #endif
 
-    /// <summary>
-    /// Controls the HelloAR example.
-    /// </summary>
     public class HelloARController : MonoBehaviour
     {
-        /// <summary>
-        /// The first-person camera being used to render the passthrough camera image (i.e. AR background).
-        /// </summary>
+  
         public Camera FirstPersonCamera;
 
-        /// <summary>
         /// A prefab for tracking and visualizing detected planes.
-        /// </summary>
         public GameObject DetectedPlanePrefab;
 
         /// <summary>
@@ -41,11 +34,8 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         public GameObject AndyPointPrefab;
         public GameObject MonsterParent;
-        public Button     FireBtn;
-        public Transform firePos;
 
-        public float speed = 15f;
-        public GameObject shelPref;
+        public GameObject TurretPrefab;
         /// <summary>
         /// The rotation in degrees need to apply to model when the Andy model is placed.
         /// </summary>
@@ -55,20 +45,8 @@ namespace GoogleARCore.Examples.HelloAR
         /// True if the app is in the process of quitting due to an ARCore connection error, otherwise false.
         /// </summary>
         private bool m_IsQuitting = false;
-     
-
         private int num_Monster;
-        /// <summary>
-        /// The Unity Update() method.
-        /// </summary>
-        /// 
-        private void Awake()
-        {
-            FireBtn.onClick.AddListener(delegate ()
-            {
-                OnClick(FireBtn.gameObject);
-            });
-        }
+
         public void Start()
         {
           
@@ -76,23 +54,17 @@ namespace GoogleARCore.Examples.HelloAR
         public void Update()
         {
             _UpdateApplicationLifecycle();
-
-            // If the player has not touched the screen, we are done with this update.
             Touch touch;
             if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
             {
                 return;
             }
-
-            // Raycast against the location the player touched to search for planes.
             TrackableHit hit;
             TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                 TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
             if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
             {
-                // Use hit pose and camera pose to check if hittest is from the
-                // back of the plane, if it is, no need to create the anchor.
                 if ((hit.Trackable is DetectedPlane) &&
                     Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
                         hit.Pose.rotation * Vector3.up) < 0)
@@ -101,12 +73,10 @@ namespace GoogleARCore.Examples.HelloAR
                 }
                 else
                 {
-                    // Choose the Andy model for the Trackable that got hit.
                     GameObject prefab;
                     if (hit.Trackable is FeaturePoint)
                     {
-                        prefab = AndyPointPrefab;
-                        Debug.Log("+++++++++++++");
+                        return;
                     }
                     else
                     {
@@ -117,16 +87,8 @@ namespace GoogleARCore.Examples.HelloAR
                     num_Monster = random.Next(10, 15);
                     for (int i = 0; i <= num_Monster; i++)
                     {
-                        // Instantiate Andy model at the hit pose.
-                        var monsterGO = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-
-                        // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
+                        var monsterGO = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);                 
                         monsterGO.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
-                        // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
-                        // world evolves.
-                        //    var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-                        // Make Andy model a child of the anchor.
-                        // andyObject.transform.parent = anchor.transform;
                         monsterGO.transform.parent = MonsterParent.transform;
                     }
                     
@@ -175,19 +137,6 @@ namespace GoogleARCore.Examples.HelloAR
                 Invoke("_DoQuit", 0.5f);
             }
         }
-
-        //UGUI按钮点击触发
-        private void OnClick(GameObject go)
-        {
-            if(go == FireBtn.gameObject)
-            {
-                GameObject shell = GameObject.Instantiate(shelPref, firePos.position, firePos.rotation) as GameObject;
-                shell.GetComponent<Rigidbody>().velocity = shell.transform.forward * speed;
-                GameObject.Destroy(shell,2);
-                
-            }
-        }
-
         /// Actually quit the application.
         private void _DoQuit()
         {
