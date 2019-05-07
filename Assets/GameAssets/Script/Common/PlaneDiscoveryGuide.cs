@@ -131,13 +131,16 @@ namespace GoogleARCore.Examples.Common
         /// </summary>
         public void Start()
         {
-            m_OpenButton.GetComponent<Button>().onClick.AddListener(_OnOpenButtonClicked);
-            m_GotItButton.onClick.AddListener(_OnGotItButtonClicked);
-
-            _CheckFieldsAreNotNull();
-            m_MoreHelpWindow.SetActive(false);
-            m_IsLostTrackingDisplayed = false;
-            m_NotDetectedPlaneElapsed = DisplayGuideDelay - k_OnStartDelay;
+            if (ARGame.sGameManage.GetIsStartGame())
+            {
+                m_OpenButton.GetComponent<Button>().onClick.AddListener(_OnOpenButtonClicked);
+                m_GotItButton.onClick.AddListener(_OnGotItButtonClicked);
+                _CheckFieldsAreNotNull();
+                m_MoreHelpWindow.SetActive(false);
+                m_IsLostTrackingDisplayed = false;
+                m_NotDetectedPlaneElapsed = DisplayGuideDelay - k_OnStartDelay;
+            }
+             
         }
 
         /// <summary>
@@ -154,8 +157,13 @@ namespace GoogleARCore.Examples.Common
         /// </summary>
         public void Update()
         {
-            _UpdateDetectedPlaneTrackingState();
-            _UpdateUI();
+            Debug.LogWarning(ARGame.sGameManage.GetIsStartGame());
+            if (ARGame.sGameManage.GetIsStartGame())
+            {
+
+                _UpdateDetectedPlaneTrackingState();
+                _UpdateUI();
+            }
         }
 
         /// <summary>

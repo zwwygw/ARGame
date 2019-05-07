@@ -41,9 +41,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// </summary>
         private const float k_ModelRotation = 180.0f;
 
-        /// <summary>
         /// True if the app is in the process of quitting due to an ARCore connection error, otherwise false.
-        /// </summary>
         private bool m_IsQuitting = false;
         private int num_Monster;
 

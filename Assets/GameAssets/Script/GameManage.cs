@@ -17,6 +17,16 @@ public class GameManage
         turretData  = new TurretData();
     }
 
+    public void StartGame()
+    {
+        this.isStartGame = true;
+    }
+
+    public void EndGame()
+    {
+
+    }
+
     public PlayerData GetPlayerData()
     {
         return this.playerData;
@@ -40,5 +50,10 @@ public class GameManage
     public void SetIsStartGame(bool status)
     {
         this.isStartGame = status;
+    }
+
+    ~GameManage()
+    {
+
     }
 }

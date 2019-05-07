@@ -8,10 +8,11 @@ public class MonsterContrller : MonoBehaviour
 {
     Animation _monsterAnim;
     private float runSpeed = 1f;
+    private MonsterData monster;
     private void Start()
     {
         _monsterAnim = GetComponent<Animation>();
-        MonsterData monster = new MonsterData();
+        monster = new MonsterData();
         
     }
     void Update()
@@ -21,6 +22,10 @@ public class MonsterContrller : MonoBehaviour
 
     void Damage()
     {
+        if (monster.getHp() > 0)
+        {
+
+        }
 
     }
 
@@ -34,29 +39,30 @@ public class MonsterContrller : MonoBehaviour
          //   transform.rotation = Quaternion.Euler(0, direction, 0);//旋转指定度数
             int dirMove = random.Next(0, 7);
             runSpeed = (float)random.Next(0, 2);
+                
             if(dirMove == 1)
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);//向前移动
             }
             else if(dirMove == 2)
             {
-                transform.Translate(Vector3.left * Time.deltaTime * runSpeed);//向前移动
+                transform.Translate(Vector3.left * Time.deltaTime * runSpeed);//向左移动
             }
             else if(dirMove == 3)
             {
-                transform.Translate(Vector3.up * Time.deltaTime * runSpeed);//向前移动
+                transform.Translate(Vector3.up * Time.deltaTime * runSpeed);//向上移动
             }
             else if(dirMove == 4)
             {
-                transform.Translate(Vector3.right * Time.deltaTime * runSpeed);//向前移动
+                transform.Translate(Vector3.right * Time.deltaTime * runSpeed);//向右移动
             }
             else if (dirMove == 5)
             {
-                transform.Translate(Vector3.back * Time.deltaTime * runSpeed);//向前移动
+                transform.Translate(Vector3.back * Time.deltaTime * runSpeed);//向后移动
             }
             else if (dirMove == 6)
             {
-                transform.Translate(Vector3.down * Time.deltaTime * runSpeed);//向前移动
+                transform.Translate(Vector3.down * Time.deltaTime * runSpeed);//向下移动
             }
         }
     }

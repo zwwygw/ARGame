@@ -22,7 +22,7 @@ public class ARGame : MonoBehaviour
     {
         if (go == StartBtn.gameObject)
         {
-            sGameManage.SetIsStartGame(true);
+            StartGame();
         }
     }
 
@@ -34,14 +34,21 @@ public class ARGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sGameManage.GetIsStartGame())
+        if (!sGameManage.GetIsStartGame())
         {
-            StartGame();
+            EndGame();
         }
+    }
+
+    void EndGame()
+    {
+        sGameManage.EndGame();
+        StartBtn.gameObject.SetActive(true);
     }
 
     void StartGame()
     {
-        StartBtn.enabled = false;
+        sGameManage.StartGame();
+        StartBtn.gameObject.SetActive(false);
     }
 }
