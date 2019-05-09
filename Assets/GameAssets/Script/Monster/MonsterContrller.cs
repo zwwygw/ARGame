@@ -12,23 +12,12 @@ public class MonsterContrller : MonoBehaviour
     private void Start()
     {
         _monsterAnim = GetComponent<Animation>();
-        monster = new MonsterData();
-        
+        monster = new MonsterData();    
     }
     void Update()
     {
        
     }
-
-    void Damage()
-    {
-        if (monster.getHp() > 0)
-        {
-
-        }
-
-    }
-
     void FixedUpdate()
     {
         if (_monsterAnim != null)
@@ -64,6 +53,18 @@ public class MonsterContrller : MonoBehaviour
             {
                 transform.Translate(Vector3.down * Time.deltaTime * runSpeed);//向下移动
             }
+        }
+    }
+    void Damage()
+    {
+        int hp = monster.getHp();
+        if (hp <= 0)
+            return;
+        hp -= Random.Range(10, 20);
+       
+        if (hp <= 0)
+        {
+            GameObject.Destroy(this.gameObject);
         }
     }
 }

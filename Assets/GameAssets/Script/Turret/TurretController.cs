@@ -10,17 +10,19 @@ public class TurretController : MonoBehaviour
     public float speed = 15f;
     public GameObject shelPref;
 
+    private PlayerData playerData;
     private void Awake()
     {
         FireBtn.onClick.AddListener(delegate ()
         {
             OnClick(FireBtn.gameObject);
         });
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerData = new PlayerData();
     }
 
     // Update is called once per frame
@@ -36,6 +38,18 @@ public class TurretController : MonoBehaviour
             GameObject shell = GameObject.Instantiate(shelPref, firePos.position, firePos.rotation) as GameObject;
             shell.GetComponent<Rigidbody>().velocity = shell.transform.forward * speed;
             GameObject.Destroy(shell, 2);
+        }
+    }
+
+    void Damage()
+    {
+        int hp = playerData.getHp();
+        if (hp <= 0)
+            return;
+        hp -= Random.Range(10, 20);
+        if (hp <= 0)
+        {
+            GameObject.Destroy(this.gameObject);
         }
     }
 }

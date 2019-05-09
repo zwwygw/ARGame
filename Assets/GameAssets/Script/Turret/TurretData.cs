@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretData : MonoBehaviour
+public class TurretData
 {
-    // Start is called before the first frame update
-    void Start()
+    private int hurt;
+
+    public TurretData()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public int getHurt()
     {
-        
+        return this.hurt;
     }
 }
