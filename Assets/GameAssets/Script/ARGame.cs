@@ -9,6 +9,7 @@ public class ARGame : MonoBehaviour
     // Start is called before the first frame update
     public static GameManage sGameManage;
     public Button StartBtn;
+    public GameObject TurretView;
     private void Awake()
     {
         sGameManage = new GameManage();
@@ -44,11 +45,13 @@ public class ARGame : MonoBehaviour
     {
         sGameManage.EndGame();
         StartBtn.gameObject.SetActive(true);
+        TurretView.SetActive(false);
     }
 
     void StartGame()
     {
         sGameManage.StartGame();
         StartBtn.gameObject.SetActive(false);
+        TurretView.SetActive(true);
     }
 }

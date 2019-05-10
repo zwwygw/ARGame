@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class PlayerData
 {
-    private int hp;
-    private string name;
-    private int score;
+    private int hp = 0;
+    private string name = " ";
+    private int score = 0;
+    enum Player { hp = 100}
 
     public PlayerData()
     {
-            
+        this.hp = (int)Player.hp;
+    }
+
+    public void SetScore(int score)
+    {
+        if(score < 0)
+        {
+            return;
+        }
+        else
+        {
+            this.score = score;
+        }
     }
 
     public int getHp()

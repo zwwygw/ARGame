@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Random = System.Random;
 
 public class MonsterContrller : MonoBehaviour
 {
@@ -60,8 +59,8 @@ public class MonsterContrller : MonoBehaviour
         int hp = monster.getHp();
         if (hp <= 0)
             return;
-        hp -= Random.Range(10, 20);
-       
+        hp -= UnityEngine.Random.Range(10, 20);
+
         if (hp <= 0)
         {
             GameObject.Destroy(this.gameObject);
