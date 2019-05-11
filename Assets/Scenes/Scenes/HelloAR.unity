@@ -947,10 +947,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99057f03fbaedf94289bce3cc1c253d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireBtn: {fileID: 0}
-  firePos: {fileID: 0}
+  FireBtn: {fileID: 1835058805}
+  firePos: {fileID: 2082195412}
   speed: 15
-  shelPref: {fileID: 0}
+  shelPref: {fileID: 2827077487274146304, guid: 800fb0badb7759545bf25470c6e6d946,
+    type: 3}
 --- !u!4 &862676378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010681828466, guid: 8a4fca54c9faa3449bcff12193992420,
@@ -1272,7 +1273,7 @@ GameObject:
   - component: {fileID: 1835058806}
   - component: {fileID: 1835058805}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FireBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

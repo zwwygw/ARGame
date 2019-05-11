@@ -9,7 +9,6 @@ public class TurretController : MonoBehaviour
     public Transform firePos;
     public float speed = 15f;
     public GameObject shelPref;
-
     private PlayerData playerData;
     private void Awake()
     {
@@ -43,13 +42,19 @@ public class TurretController : MonoBehaviour
 
     void Damage()
     {
-        int hp = playerData.getHp();
+        int hp = playerData.GetHp();
         if (hp <= 0)
             return;
         hp -= Random.Range(10, 20);
+        playerData.SetHp(hp);
         if (hp <= 0)
         {
             GameObject.Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        
     }
 }

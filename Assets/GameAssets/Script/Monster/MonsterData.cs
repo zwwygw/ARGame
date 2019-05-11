@@ -17,14 +17,25 @@ public class MonsterData
         this.hurt = (int)Monster1.hurt;
     }
 
-    public int getHp()
+    public int GetHp()
     {
         return this.hp;
     }
 
-
-    public int getHurt()
+    public int GetHurt()
     {
         return this.hurt;
+    }
+
+    public void SetHp(int hp)
+    {
+        if (hp < 0)
+        {
+            this.hp = 0;
+        }
+        else
+        {
+            this.hp = hp;
+        }
     }
 }

@@ -18,7 +18,7 @@ public class PlayerData
     {
         if(score < 0)
         {
-            return;
+            this.score = 0;
         }
         else
         {
@@ -26,17 +26,30 @@ public class PlayerData
         }
     }
 
-    public int getHp()
+
+    public void SetHp(int hp)
+    {
+        if (hp < 0)
+        {
+            this.hp = 0;
+        }
+        else
+        {
+            this.hp = hp;
+        }
+    }
+
+    public int GetHp()
     {
         return this.hp;
     }
 
-    public int getScore()
+    public int GetScore()
     {
         return this.score;
     }
 
-    public string getName()
+    public string GetName()
     {
         return this.name;
     }

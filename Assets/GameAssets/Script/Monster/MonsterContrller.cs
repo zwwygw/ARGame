@@ -22,7 +22,12 @@ public class MonsterContrller : MonoBehaviour
         if (_monsterAnim != null)
         {
             _monsterAnim.Play("idle");
-            System.Random random = new System.Random((int)DateTime.Now.Ticks);
+            monsterMove();
+        }
+    }
+
+    private void monsterMove(){
+           System.Random random = new System.Random((int)DateTime.Now.Ticks);
             float direction = (float)random.Next(0, 360);//在0--360之间随机生成一个单精度小数)
          //   transform.rotation = Quaternion.Euler(0, direction, 0);//旋转指定度数
             int dirMove = random.Next(0, 7);
@@ -52,18 +57,32 @@ public class MonsterContrller : MonoBehaviour
             {
                 transform.Translate(Vector3.down * Time.deltaTime * runSpeed);//向下移动
             }
-        }
     }
+
+    private void monsterAttack()
+    {
+
+    }
+
     void Damage()
     {
-        int hp = monster.getHp();
+        int hp = monster.GetHp();
         if (hp <= 0)
             return;
         hp -= UnityEngine.Random.Range(10, 20);
-
+        monster.SetHp(hp);
         if (hp <= 0)
         {
             GameObject.Destroy(this.gameObject);
+        }
+    }
+
+        public void OnTriggerEnter(Collider other)
+    {
+
+        if (other.tag == "player")
+        {
+            other.SendMessage("Damage");
         }
     }
 }

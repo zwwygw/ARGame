@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6636171338336970103}
   - component: {fileID: 5738277827769822673}
   - component: {fileID: 390169536190397287}
-  - component: {fileID: 4387839703015054602}
+  - component: {fileID: 992055474349527858}
   m_Layer: 0
   m_Name: Shell
   m_TagString: Untagged
@@ -110,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4387839703015054602
+--- !u!114 &992055474349527858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,6 +119,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2827077487274146304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2a6f2d8abe7ee84ea0292e6d536d0f2, type: 3}
+  m_Script: {fileID: 11500000, guid: b986b4d5a8987824591870617d395fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 15
+  shelPref: {fileID: 0}
