@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 public class MonsterContrller : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class MonsterContrller : MonoBehaviour
     private MonsterData monster;
     private void Start()
     {
+        var seq = DOTween.Sequence();
+        seq.Insert(0, gameObject.transform.DOMoveY(5, 1).From(false));
+        seq.Insert(0, gameObject.transform.DOMoveY(5, 1).From(false));
         _monsterAnim = GetComponent<Animation>();
         monster = new MonsterData();    
     }
