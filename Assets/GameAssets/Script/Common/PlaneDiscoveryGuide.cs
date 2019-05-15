@@ -18,8 +18,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace GoogleARCore.Examples.Common
-{
     using System.Collections.Generic;
     using GoogleARCore;
     using UnityEngine;
@@ -339,4 +337,4 @@ namespace GoogleARCore.Examples.Common
             }
         }
     }
-}
+
