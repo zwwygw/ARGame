@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ARGame : MonoBehaviour
 {
-    // Start is called before the first frame update
     public static GameManage sGameManage;
     public Button StartBtn;
     public GameObject TurretView;
@@ -32,7 +31,6 @@ public class ARGame : MonoBehaviour
       
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!sGameManage.GetIsStartGame())

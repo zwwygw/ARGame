@@ -1,22 +1,4 @@
-//-----------------------------------------------------------------------
-// <copyright file="DetectedPlaneVisualizer.cs" company="Google">
-//
-// Copyright 2017 Google Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-// </copyright>
-//-----------------------------------------------------------------------
+
 
 namespace GoogleARCore.Examples.Common
 {
@@ -24,9 +6,6 @@ namespace GoogleARCore.Examples.Common
     using GoogleARCore;
     using UnityEngine;
 
-    /// <summary>
-    /// Visualizes a single DetectedPlane in the Unity scene.
-    /// </summary>
     public class DetectedPlaneVisualizer : MonoBehaviour
     {
         private static int s_PlaneCount = 0;
@@ -52,7 +31,6 @@ namespace GoogleARCore.Examples.Common
 
         private DetectedPlane m_DetectedPlane;
 
-        // Keep previous frame's mesh polygon to avoid mesh update every frame.
         private List<Vector3> m_PreviousFrameMeshVertices = new List<Vector3>();
         private List<Vector3> m_MeshVertices = new List<Vector3>();
         private Vector3 m_PlaneCenter = new Vector3();
@@ -65,18 +43,12 @@ namespace GoogleARCore.Examples.Common
 
         private MeshRenderer m_MeshRenderer;
 
-        /// <summary>
-        /// The Unity Awake() method.
-        /// </summary>
         public void Awake()
         {
             m_Mesh = GetComponent<MeshFilter>().mesh;
             m_MeshRenderer = GetComponent<UnityEngine.MeshRenderer>();
         }
 
-        /// <summary>
-        /// The Unity Update() method.
-        /// </summary>
         public void Update()
         {
             if (m_DetectedPlane == null)
@@ -99,10 +71,6 @@ namespace GoogleARCore.Examples.Common
             _UpdateMeshIfNeeded();
         }
 
-        /// <summary>
-        /// Initializes the DetectedPlaneVisualizer with a DetectedPlane.
-        /// </summary>
-        /// <param name="plane">The plane to vizualize.</param>
         public void Initialize(DetectedPlane plane)
         {
             m_DetectedPlane = plane;
@@ -112,9 +80,6 @@ namespace GoogleARCore.Examples.Common
             Update();
         }
 
-        /// <summary>
-        /// Update mesh with a list of Vector3 and plane's center position.
-        /// </summary>
         private void _UpdateMeshIfNeeded()
         {
             m_DetectedPlane.GetBoundaryPolygon(m_MeshVertices);
@@ -135,36 +100,23 @@ namespace GoogleARCore.Examples.Common
 
             int planePolygonCount = m_MeshVertices.Count;
 
-            // The following code converts a polygon to a mesh with two polygons, inner
-            // polygon renders with 100% opacity and fade out to outter polygon with opacity 0%, as shown below.
-            // The indices shown in the diagram are used in comments below.
-            // _______________     0_______________1
-            // |             |      |4___________5|
-            // |             |      | |         | |
-            // |             | =>   | |         | |
-            // |             |      | |         | |
-            // |             |      |7-----------6|
-            // ---------------     3---------------2
+
             m_MeshColors.Clear();
 
-            // Fill transparent color to vertices 0 to 3.
+
             for (int i = 0; i < planePolygonCount; ++i)
             {
                 m_MeshColors.Add(Color.clear);
             }
 
-            // Feather distance 0.2 meters.
             const float featherLength = 0.2f;
 
-            // Feather scale over the distance between plane center and vertices.
             const float featherScale = 0.2f;
 
-            // Add vertex 4 to 7.
             for (int i = 0; i < planePolygonCount; ++i)
             {
                 Vector3 v = m_MeshVertices[i];
 
-                // Vector from plane center to current point
                 Vector3 d = v - m_PlaneCenter;
 
                 float scale = 1.0f - Mathf.Min(featherLength / d.magnitude, featherScale);
@@ -177,7 +129,6 @@ namespace GoogleARCore.Examples.Common
             int firstOuterVertex = 0;
             int firstInnerVertex = planePolygonCount;
 
-            // Generate triangle (4, 5, 6) and (4, 6, 7).
             for (int i = 0; i < planePolygonCount - 2; ++i)
             {
                 m_MeshIndices.Add(firstInnerVertex);
@@ -185,8 +136,6 @@ namespace GoogleARCore.Examples.Common
                 m_MeshIndices.Add(firstInnerVertex + i + 2);
             }
 
-            // Generate triangle (0, 1, 4), (4, 1, 5), (5, 1, 2), (5, 2, 6), (6, 2, 3), (6, 3, 7)
-            // (7, 3, 0), (7, 0, 4)
             for (int i = 0; i < planePolygonCount; ++i)
             {
                 int outerVertex1 = firstOuterVertex + i;
