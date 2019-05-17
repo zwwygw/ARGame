@@ -12,7 +12,15 @@ public class PlayerData
     public PlayerData()
     {
         this.hp = (int)Player.hp;
+        this.score = 0;
     }
+
+    public void initPlayerData()
+    {
+        this.hp = (int)Player.hp;
+        this.score = 0;
+    }
+
 
     public void SetScore(int score)
     {

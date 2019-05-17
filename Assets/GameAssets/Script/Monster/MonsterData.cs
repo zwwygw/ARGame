@@ -8,14 +8,22 @@ public class MonsterData
     //伤害
     private int hurt;
     //
-    enum Monster1 {hp=10,hurt=10}
-    enum Monster2 {hp = 20, hurt = 10}
+    enum Monster1 {hp=100,hurt=10}
+    enum Monster2 {hp = 200, hurt = 20}
 
     public MonsterData()
     {
         this.hp = (int)Monster1.hp;
         this.hurt = (int)Monster1.hurt;
     }
+
+
+    public void initMonsterData()
+    {
+        this.hp = (int)Monster1.hp;
+        this.hurt = (int)Monster1.hurt;
+    }
+
 
     public int GetHp()
     {

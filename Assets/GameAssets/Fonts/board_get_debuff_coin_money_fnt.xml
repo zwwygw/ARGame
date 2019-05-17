@@ -1,0 +1,27 @@
+<font>
+	<info face="board_get_debuff_coin_money_fnt" size="84" />
+	<common lineHeight="84" scaleW="186" scaleH="225" pages="1" />
+	<pages>
+		<page id="0" file="board_get_debuff_coin_money_fnt.png" />
+	</pages>
+	<chars count="16">
+		<char id="120" x="0" y="0" width="53" height="47" xoffset="0" yoffset="28" xadvance="54" /><!-- x -->
+		<char id="43" x="0" y="178" width="43" height="46" xoffset="0" yoffset="26" xadvance="44" /><!-- + -->
+		<char id="45" x="44" y="178" width="26" height="21" xoffset="0" yoffset="40" xadvance="27" /><!-- - -->
+		<char id="44" x="51" y="66" width="25" height="29" xoffset="0" yoffset="55" xadvance="26" /><!-- , -->
+		<char id="49" x="146" y="0" width="34" height="64" xoffset="0" yoffset="20" xadvance="35" /><!-- 1 -->
+		<char id="50" x="101" y="0" width="44" height="64" xoffset="0" yoffset="20" xadvance="45" /><!-- 2 -->
+		<char id="51" x="143" y="65" width="42" height="65" xoffset="0" yoffset="19" xadvance="43" /><!-- 3 -->
+		<char id="52" x="0" y="48" width="50" height="63" xoffset="0" yoffset="21" xadvance="51" /><!-- 4 -->
+		<char id="53" x="142" y="132" width="42" height="64" xoffset="0" yoffset="20" xadvance="43" /><!-- 5 -->
+		<char id="54" x="96" y="66" width="46" height="65" xoffset="0" yoffset="19" xadvance="47" /><!-- 6 -->
+		<char id="55" x="96" y="132" width="45" height="64" xoffset="0" yoffset="20" xadvance="46" /><!-- 7 -->
+		<char id="56" x="0" y="112" width="47" height="65" xoffset="0" yoffset="19" xadvance="48" /><!-- 8 -->
+		<char id="57" x="54" y="0" width="46" height="65" xoffset="0" yoffset="19" xadvance="47" /><!-- 9 -->
+		<char id="48" x="48" y="112" width="47" height="65" xoffset="0" yoffset="19" xadvance="48" /><!-- 0 -->
+		<char id="32" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="29" /><!--   -->
+		<char id="9" x="0" y="0" width="0" height="0" xoffset="0" yoffset="0" xadvance="232" /><!-- 	 -->
+	</chars>
+	<kernings count="0">
+	</kernings>
+</font>

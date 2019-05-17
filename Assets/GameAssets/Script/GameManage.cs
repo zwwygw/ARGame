@@ -20,6 +20,14 @@ public class GameManage
     public void StartGame()
     {
         this.isStartGame = true;
+        initGameData();
+    }
+
+    private void initGameData()
+    {
+        playerData.initPlayerData();
+        monsterData.initMonsterData();
+        turretData.initTurretData();
     }
 
     public void EndGame()

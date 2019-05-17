@@ -30,6 +30,10 @@ public class MonsterContrller : MonoBehaviour
         }
     }
 
+    private void moveByTween()
+    {
+
+    }
     private void monsterMove(){
            System.Random random = new System.Random((int)DateTime.Now.Ticks);
             float direction = (float)random.Next(0, 360);//在0--360之间随机生成一个单精度小数)
@@ -65,7 +69,8 @@ public class MonsterContrller : MonoBehaviour
 
     private void monsterAttack()
     {
-
+         _monsterAnim.Play("attack");
+        Shock();
     }
 
     void Damage()
@@ -75,13 +80,19 @@ public class MonsterContrller : MonoBehaviour
             return;
         hp -= UnityEngine.Random.Range(10, 20);
         monster.SetHp(hp);
+        transform.DOShakePosition(1, new Vector3(1, 1, 0));
         if (hp <= 0)
         {
             GameObject.Destroy(this.gameObject);
         }
     }
 
-        public void OnTriggerEnter(Collider other)
+    public static void Shock()
+    {
+        Handheld.Vibrate();
+    }
+
+    public void OnTriggerEnter(Collider other)
     {
 
         if (other.tag == "player")

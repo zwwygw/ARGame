@@ -9,6 +9,7 @@ public class ARGame : MonoBehaviour
     public static GameManage sGameManage;
     public Button StartBtn;
     public GameObject TurretView;
+    public Text ScoreText;
     private void Awake()
     {
         sGameManage = new GameManage();
@@ -28,7 +29,7 @@ public class ARGame : MonoBehaviour
 
     void Start()
     {
-      
+        ScoreText.text = "欢迎游戏";
     }
 
     void Update()
@@ -42,6 +43,8 @@ public class ARGame : MonoBehaviour
     void EndGame()
     {
         sGameManage.EndGame();
+        ScoreText.gameObject.SetActive(true);
+        ScoreText.text = sGameManage.GetPlayerData().GetScore().ToString();
         StartBtn.gameObject.SetActive(true);
         TurretView.SetActive(false);
     }
@@ -50,6 +53,7 @@ public class ARGame : MonoBehaviour
     {
         sGameManage.StartGame();
         StartBtn.gameObject.SetActive(false);
+        ScoreText.gameObject.SetActive(false);
         TurretView.SetActive(true);
     }
 }

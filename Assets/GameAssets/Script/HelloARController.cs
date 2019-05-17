@@ -18,7 +18,7 @@ namespace GoogleARCore.Examples.HelloAR
 
     public class HelloARController : MonoBehaviour
     {
-  
+        
         public Camera FirstPersonCamera;
         public GameObject DetectedPlanePrefab;
         public GameObject Monster;
@@ -65,7 +65,6 @@ namespace GoogleARCore.Examples.HelloAR
                     else
                     {
                         prefab = Monster; 
-                        Debug.Log("***********");
                     }
                     System.Random random = new System.Random((int)DateTime.Now.Ticks);
                     num_Monster = random.Next(10, 15);
@@ -104,13 +103,13 @@ namespace GoogleARCore.Examples.HelloAR
 
             if (Session.Status == SessionStatus.ErrorPermissionNotGranted)
             {
-                _ShowAndroidToastMessage("Camera permission is needed to run this application.");
+                _ShowAndroidToastMessage("需要获得照相机权限.");
                 m_IsQuitting = true;
                 Invoke("_DoQuit", 0.5f);
             }
             else if (Session.Status.IsError())
             {
-                _ShowAndroidToastMessage("ARCore encountered a problem connecting.  Please start the app again.");
+                _ShowAndroidToastMessage("ARCore组件出现问题请重启APP.");
                 m_IsQuitting = true;
                 Invoke("_DoQuit", 0.5f);
             }

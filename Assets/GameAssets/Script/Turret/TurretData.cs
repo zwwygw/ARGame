@@ -8,6 +8,12 @@ public class TurretData
 
     public TurretData()
     {
+        this.hurt = 10;
+    }
+
+    public void initTurretData()
+    {
+        this.hurt = 10;
 
     }
 

@@ -9,7 +9,7 @@ public class Shake : MonoBehaviour {
         //第一个参数：震动时长
         //第二个：震动的轴
         //震动强度默认是1   0~1（没写出来）
-        transform.DOShakePosition(1, new Vector3(1, 1, 0));
+        transform.DOShakePosition(1, new Vector3(1, 1, 1),10);
 	}
 	
 	// Update is called once per frame
