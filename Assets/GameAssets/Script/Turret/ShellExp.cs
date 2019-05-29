@@ -21,6 +21,7 @@ public class ShellExp : MonoBehaviour
 
         if (other.tag == "monster")
         {
+            Debug.Log("ac*****");
             other.SendMessage("Damage");
         }
     }

@@ -21,6 +21,11 @@ public class PlayerData
         this.score = 0;
     }
 
+    public void SetScore()
+    {
+        this.score++;
+    }
+
 
     public void SetScore(int score)
     {

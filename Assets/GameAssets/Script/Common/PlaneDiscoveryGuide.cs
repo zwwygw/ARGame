@@ -50,7 +50,7 @@
 
         public void Start()
         {
-            if (ARGame.sGameManage.GetIsStartGame())
+            if (ARGame.sGameManage.getStartDectedPlane())
             {
                 m_OpenButton.GetComponent<Button>().onClick.AddListener(_OnOpenButtonClicked);
                 m_GotItButton.onClick.AddListener(_OnGotItButtonClicked);
@@ -70,8 +70,8 @@
 
         public void Update()
         {
-            Debug.LogWarning(ARGame.sGameManage.GetIsStartGame());
-            if (ARGame.sGameManage.GetIsStartGame())
+            Debug.LogWarning(ARGame.sGameManage.getStartDectedPlane());
+            if (ARGame.sGameManage.getStartDectedPlane())
             {
 
                 _UpdateDetectedPlaneTrackingState();

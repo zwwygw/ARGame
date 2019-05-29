@@ -9,7 +9,21 @@ public class ARGame : MonoBehaviour
     public static GameManage sGameManage;
     public Button StartBtn;
     public GameObject TurretView;
+
+    public GameObject TurretGo;
     public Text ScoreText;
+    public Text ScoreNum;
+    private bool con  = false;
+    private static ARGame _instance;
+
+    public static ARGame GetInstance()
+    {
+        if (_instance == null)
+            {
+              _instance = GameObject.FindObjectOfType<ARGame>();
+            }
+            return _instance;
+    }
     private void Awake()
     {
         sGameManage = new GameManage();
@@ -19,41 +33,48 @@ public class ARGame : MonoBehaviour
         });
     }
 
+    public  GameManage getGameManage()
+    {
+        return sGameManage;
+    }
     private void OnClick(GameObject go)
     {
         if (go == StartBtn.gameObject)
         {
-            StartGame();
+            sGameManage.StartDetectedPlane();
+            StartBtn.gameObject.SetActive(false);
+            ScoreText.gameObject.SetActive(false);
         }
     }
 
     void Start()
     {
-        ScoreText.text = "欢迎游戏";
+        ScoreText.text = "Hello AR";
+        ScoreNum.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (!sGameManage.GetIsStartGame())
+        if(sGameManage.GetIsStartGame())
         {
-            EndGame();
+            TurretView.SetActive(true);
+            TurretGo.SetActive(true);
         }
     }
 
-    void EndGame()
+    public void EndGame()
     {
         sGameManage.EndGame();
         ScoreText.gameObject.SetActive(true);
-        ScoreText.text = sGameManage.GetPlayerData().GetScore().ToString();
+        ScoreNum.gameObject.SetActive(true);
+        ScoreNum.text = sGameManage.GetPlayerData().GetScore().ToString();
+        ScoreText.text = "SCore";
         StartBtn.gameObject.SetActive(true);
         TurretView.SetActive(false);
     }
 
-    void StartGame()
+    public  void StartGame()
     {
         sGameManage.StartGame();
-        StartBtn.gameObject.SetActive(false);
-        ScoreText.gameObject.SetActive(false);
-        TurretView.SetActive(true);
     }
 }
