@@ -524,10 +524,6 @@ PrefabInstance:
       propertyPath: firePos
       value: 
       objectReference: {fileID: 4882647317066239450}
-    - target: {fileID: 862676380, guid: f2a6a6024026fc644b66007d4c2940a7, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1364520423, guid: f2a6a6024026fc644b66007d4c2940a7, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -547,6 +543,10 @@ PrefabInstance:
     - target: {fileID: 1364520423, guid: f2a6a6024026fc644b66007d4c2940a7, type: 3}
       propertyPath: m_Center.z
       value: -1.265676
+      objectReference: {fileID: 0}
+    - target: {fileID: 862676380, guid: f2a6a6024026fc644b66007d4c2940a7, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2a6a6024026fc644b66007d4c2940a7, type: 3}

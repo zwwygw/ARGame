@@ -265,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1899a721682ef0041977692e11b6815e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initPos: {fileID: 6307413386527092298, guid: 7350f8cab52715647983378f287a0ce8, type: 3}
+  smoothTime: 10
 --- !u!54 &6232168713008792051
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -280,7 +282,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!65 &813544289092571233
 BoxCollider:
   m_ObjectHideFlags: 0

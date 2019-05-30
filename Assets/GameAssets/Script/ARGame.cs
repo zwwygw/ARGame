@@ -71,6 +71,7 @@ public class ARGame : MonoBehaviour
         ScoreText.text = "SCore";
         StartBtn.gameObject.SetActive(true);
         TurretView.SetActive(false);
+        TurretGo.SetActive(false);
     }
 
     public  void StartGame()

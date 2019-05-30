@@ -50,7 +50,7 @@ public class TurretController : MonoBehaviour
         int hp = ARGame.sGameManage.GetPlayerData().GetHp();
         if (hp <= 0)
             return;
-        hp -= Random.Range(10, 20);
+        hp -= Random.Range(1, 2);
         ARGame.sGameManage.GetPlayerData().SetHp(hp);
         if (hp <= 0)
         {

@@ -4,8 +4,8 @@ using System ;
 public class Wandering : MonoBehaviour {
 	public float speed=1;
 	public int channge=1;
-	//public float time=1f;
-	//public int ok;
+	public float time=1f;
+	public int ok;
 	// Use this for initialization
 	void Start () {
 		transform.position = new Vector3 (UnityEngine.Random.Range (-20f, 20f), 0.5f, UnityEngine.Random.Range (-20f, 20f));
@@ -13,12 +13,12 @@ public class Wandering : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//time += 0.01f;
-		/*if(time %2f<=0.1f){
+		// time += 0.01f;
+		// if(time %2f<=0.1f){
 			ok = UnityEngine.Random.Range (1, 10);
 			if(ok==1)
 			channge = UnityEngine.Random.Range (1, 4);
-		}*/
+		// }
 		if (channge == 1) {
 			transform.position += new Vector3 (speed * Time.deltaTime,0,0);
 			Quaternion lookRot = Quaternion.LookRotation (new Vector3 (1f, 0, 0));
